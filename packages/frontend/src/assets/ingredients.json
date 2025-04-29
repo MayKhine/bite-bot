@@ -1,0 +1,68 @@
+{
+  "Vegetables": [
+    "onion",
+    "garlic",
+    "tomato",
+    "bell pepper",
+    "carrot",
+    "spinach",
+    "broccoli",
+    "cilantro",
+    "parsley",
+    "basil"
+  ],
+  "Proteins": [
+    "chicken breast",
+    "ground beef",
+    "eggs",
+    "salmon",
+    "tofu",
+    "shrimp",
+    "lentils",
+    "chickpeas",
+    "bacon",
+    "pork chops"
+  ],
+  "Grains": [
+    "white rice",
+    "brown rice",
+    "pasta",
+    "bread",
+    "tortillas",
+    "quinoa",
+    "oats",
+    "flour",
+    "cornmeal"
+  ],
+  "Dairy": [
+    "milk",
+    "butter",
+    "cheddar cheese",
+    "parmesan",
+    "yogurt",
+    "cream cheese"
+  ],
+  "Pantry": [
+    "olive oil",
+    "soy sauce",
+    "salt",
+    "black pepper",
+    "sugar",
+    "vinegar",
+    "honey",
+    "canned tomatoes",
+    "tomato paste"
+  ],
+  "Spices": [
+    "cumin",
+    "paprika",
+    "chili powder",
+    "oregano",
+    "thyme",
+    "rosemary",
+    "turmeric",
+    "cinnamon",
+    "ginger",
+    "nutmeg"
+  ]
+}
