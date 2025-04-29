@@ -1,35 +1,46 @@
+import { useState } from "react"
 import ingredients from "../assets/ingredients.json"
-export type IngredientCategory = {
-  [category: string]: string[]
-}
+import CreatableSelect from "react-select/creatable"
 
 type IngredientDropdownProps = {
   value: string
-  onChange: (value: string) => void
+  onSelect: (value: string) => void
 }
 
+type SelectOptionType = {
+  label: string
+  value: string
+}
 export const IngredientDropdown = ({
   value,
-  onChange,
+  onSelect,
 }: IngredientDropdownProps) => {
-  const typedIngredients: IngredientCategory = ingredients
+  const ingredientOptions = ingredients.map((item: string) => ({
+    label: item,
+    value: item,
+  }))
+
+  const selectedOption = ingredientOptions.find(
+    (opt) => opt.value === value
+  ) || {
+    label: value,
+    value,
+  }
+
+  const [option, setOption] = useState<SelectOptionType | null>(selectedOption)
 
   return (
-    <select
-      className="border rounded p-2 w-full"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-    >
-      {/* <option value="">Select an ingredient</option> */}
-      {Object.entries(typedIngredients).map(([category, items]) => (
-        <optgroup key={category} label={category}>
-          {items.map((item) => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
-        </optgroup>
-      ))}
-    </select>
+    <CreatableSelect
+      isClearable
+      options={ingredientOptions}
+      value={option}
+      onChange={(newValue) => {
+        if (newValue?.value) {
+          onSelect(newValue.value)
+          setOption({ label: "", value: "" })
+        }
+      }}
+      placeholder="Select or type an ingredient"
+    />
   )
 }

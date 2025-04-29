@@ -1,11 +1,8 @@
 import { useState } from "react"
 import { IngredientDropdown } from "./IngredientDropdown"
+import { IngredientButton } from "./IngredientButton"
 export const Recipe = () => {
-  const [recipeIngredients, setRecipeIngredients] = useState([
-    "chiken",
-    "tomato",
-    "basil",
-  ])
+  const [recipeIngredients, setRecipeIngredients] = useState<Array<string>>([])
   const [recipeResult, setRecipeResult] = useState("test")
   const [loading, setLoading] = useState(false)
   const [ingredient, setIngredient] = useState("")
@@ -39,10 +36,35 @@ export const Recipe = () => {
   return (
     <div>
       <div> Recipe</div>
-      <IngredientDropdown value={ingredient} onChange={setIngredient} />
+      <IngredientDropdown
+        value={ingredient}
+        onSelect={(selectedIngredient) => {
+          setIngredient(selectedIngredient)
+          setRecipeIngredients((prev) => {
+            if (!prev) return [selectedIngredient]
+            return [...prev, selectedIngredient]
+          })
+        }}
+      />
       {ingredient && (
         <p className="mt-4 text-green-700">You selected: {ingredient}</p>
       )}
+      <div>
+        <div> Recipe Ingredients</div>
+        <div className="flex gap-2">
+          {recipeIngredients.map((ingredient, index) => {
+            return (
+              <IngredientButton
+                key={index}
+                value={ingredient}
+                onClick={() => {
+                  console.log("Delete this ", ingredient)
+                }}
+              />
+            )
+          })}
+        </div>
+      </div>
       <div>Recipe: {recipeResult}</div>
       <button
         onClick={handleSubmit}
