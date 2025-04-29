@@ -5,9 +5,8 @@ import { IngredientButton } from "./IngredientButton"
 type RecipeBoardProps = {
   getRecipeResult: (result: string) => void
 }
-export const RecipeBoard = ({ getRecipeResult }: RecipeBoardProps) => {
+export const GenerateRecipe = ({ getRecipeResult }: RecipeBoardProps) => {
   const [recipeIngredients, setRecipeIngredients] = useState<Array<string>>([])
-  // const [recipeResult, setRecipeResult] = useState("")
   const [loading, setLoading] = useState(false)
   const [ingredient, setIngredient] = useState("")
   const [buttonText, setButtonText] = useState("Get recipe")
@@ -29,12 +28,8 @@ export const RecipeBoard = ({ getRecipeResult }: RecipeBoardProps) => {
 
       const data = await res.json()
       console.log("Data returned: ", data)
-      // setRecipeResult(data.recipe)
       getRecipeResult(data.recipe)
     } catch (error) {
-      // setRecipeResult(
-      //   "Sorry, there was an error generating the recipe." + error
-      // )
       getRecipeResult(
         "Sorry, there was an error generating the recipe." + error
       )
@@ -44,8 +39,8 @@ export const RecipeBoard = ({ getRecipeResult }: RecipeBoardProps) => {
   }
 
   return (
-    <div>
-      <div className="bg-green-100 flex flex-col gap-2">
+    <div className="flex flex-col gap-5 w-full items-center">
+      <div>
         <div> Recipe Ingredients</div>
         <IngredientDropdown
           value={ingredient}
@@ -58,7 +53,9 @@ export const RecipeBoard = ({ getRecipeResult }: RecipeBoardProps) => {
             })
           }}
         />
-        <div className="flex gap-2">
+      </div>
+      {recipeIngredients.length > 0 && (
+        <div className="flex flex-row gap-3 flex-wrap w-full items-center justify-center">
           {recipeIngredients.map((ingredient, index) => {
             return (
               <IngredientButton
@@ -71,27 +68,20 @@ export const RecipeBoard = ({ getRecipeResult }: RecipeBoardProps) => {
             )
           })}
         </div>
-        <button
-          onClick={handleSubmit}
-          className={`px-4 py-2 rounded w-max
+      )}
+      <button
+        onClick={handleSubmit}
+        className={`px-4 py-2 rounded-md w-max
           ${
             loading || recipeIngredients.length == 0
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-500 hover:bg-blue-600"
+              ? "bg-gray-500 cursor-not-allowed text-white border-solid border-3 border-gray-500 box-border"
+              : "bg-watermelon hover:bg-tomato text-white border-solid border-3 border-tomato box-border cursor-pointer"
           }
           `}
-          disabled={loading || recipeIngredients.length == 0}
-        >
-          {loading ? "Generating..." : buttonText}
-        </button>
-      </div>
-
-      {/* {recipeResult && (
-        <div>
-          Recipe:
-          <div>{recipeResult}</div>
-        </div>
-      )} */}
+        disabled={loading || recipeIngredients.length == 0}
+      >
+        {loading ? "Generating..." : buttonText}
+      </button>
     </div>
   )
 }

@@ -31,6 +31,7 @@ export const IngredientDropdown = ({
 
   return (
     <CreatableSelect
+      className="w-80"
       isClearable
       options={ingredientOptions}
       value={option}

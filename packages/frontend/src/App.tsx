@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Header } from "./components/Header"
-import { RecipeBoard } from "./components/RecipeBoard"
+import { GenerateRecipe } from "./components/GenerateRecipe"
 import { Recipe } from "./components/Recipe"
 
 export type RecipeResultType = {
@@ -14,15 +14,15 @@ export const App = () => {
   const [recipeResult, setRecipeResult] = useState<string>()
 
   return (
-    <div>
+    <div className="p-10 box-border ">
       <Header />
-      <div className="bg-amber-200">
-        <RecipeBoard
+
+      <div className="flex flex-col gap-10">
+        <GenerateRecipe
           getRecipeResult={(result: string) => {
             setRecipeResult(result)
           }}
         />
-
         {recipeResult && <Recipe recipeData={recipeResult} />}
       </div>
     </div>
