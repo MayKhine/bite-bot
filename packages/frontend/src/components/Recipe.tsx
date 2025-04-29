@@ -1,81 +1,95 @@
-import { useState } from "react"
-import { IngredientDropdown } from "./IngredientDropdown"
-import { IngredientButton } from "./IngredientButton"
-export const Recipe = () => {
-  const [recipeIngredients, setRecipeIngredients] = useState<Array<string>>([])
-  const [recipeResult, setRecipeResult] = useState("test")
-  const [loading, setLoading] = useState(false)
-  const [ingredient, setIngredient] = useState("")
+type RecipeProps = {
+  recipeData: string
+}
 
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    setLoading(true)
+type RecipeDataType = {
+  name: string
+  ingredients: string[]
+  instructions: string[]
+  notes?: string
+  funFact?: string
+}
 
-    try {
-      const res = await fetch("http://localhost:4000/generate-recipe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          prompt: `Generate a recipe using ${recipeIngredients}`,
-        }),
-      })
+const parseRecipe = (recipeDataRaw: string) => {
+  const sectionRegex = /\*\*\*(.*?)\*\*\*\s*([\s\S]*?)(?=\*\*\*|$)/g
+  const parsed: RecipeDataType = {
+    name: "",
+    ingredients: [],
+    instructions: [],
+  }
+  let match
+  while ((match = sectionRegex.exec(recipeDataRaw)) !== null) {
+    const key = match[1].trim().toLowerCase()
+    const value = match[2].trim()
 
-      const data = await res.json()
-      console.log("Data returned: ", data)
-      setRecipeResult(data.recipe)
-    } catch (error) {
-      setRecipeResult(
-        "Sorry, there was an error generating the recipe." + error
-      )
-    } finally {
-      setLoading(false)
+    switch (key) {
+      case "recipe name":
+        parsed.name = value
+        break
+      case "ingredients":
+        parsed.ingredients = value
+          .split("\n")
+          .map((line) => line.replace(/^\* /, "").trim())
+        break
+      case "instructions":
+        parsed.instructions = value
+          .split("\n")
+          .map((line) => line.replace(/^\d+\.\s*/, "").trim())
+        break
+      case "notes":
+        parsed.notes = value
+        break
+      case "fun fact":
+        parsed.funFact = value
+        break
     }
   }
+
+  return parsed
+}
+
+export const Recipe = ({ recipeData }: RecipeProps) => {
+  const recipe = parseRecipe(recipeData)
   return (
     <div>
-      <div> Recipe</div>
-      <IngredientDropdown
-        value={ingredient}
-        onSelect={(selectedIngredient) => {
-          setIngredient(selectedIngredient)
-          setRecipeIngredients((prev) => {
-            if (!prev) return [selectedIngredient]
-            return [...prev, selectedIngredient]
-          })
-        }}
-      />
-      {ingredient && (
-        <p className="mt-4 text-green-700">You selected: {ingredient}</p>
-      )}
-      <div>
-        <div> Recipe Ingredients</div>
-        <div className="flex gap-2">
-          {recipeIngredients.map((ingredient, index) => {
-            return (
-              <IngredientButton
-                key={index}
-                value={ingredient}
-                onClick={() => {
-                  console.log("Delete this ", ingredient)
-                }}
-              />
-            )
-          })}
+      <div> Recipe </div>
+      <div className="bg-blue-100 flex flex-col gap-2">
+        <div>
+          <div>Recipe</div>
+          <div>{recipe.name}</div>
         </div>
+        <div>
+          <div>Ingredients</div>
+          <div>
+            {recipe.ingredients.map((ingredient, index) => (
+              <div key={index}> {ingredient}</div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <div>Instructions</div>
+          <div>
+            {recipe.instructions.map((step, index) => (
+              <div key={index}>
+                {index + 1}: {step}
+              </div>
+            ))}
+          </div>
+        </div>
+        {recipe.notes && (
+          <div>
+            <div>Notes</div>
+            <div>{recipe.notes}</div>
+          </div>
+        )}
+        {recipe.funFact && (
+          <div>
+            <div>Fun Fact</div>
+            <div>{recipe.funFact}</div>
+          </div>
+        )}
       </div>
-      <div>Recipe: {recipeResult}</div>
-      <button
-        onClick={handleSubmit}
-        className={`px-4 py-2 rounded ${
-          loading
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-blue-500 hover:bg-blue-600"
-        }`}
-      >
-        {loading ? "Generating..." : "Get Recipe"}
-      </button>
     </div>
   )
 }
