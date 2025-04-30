@@ -1,3 +1,5 @@
+import { TextCard } from "./TextCard"
+
 type RecipeProps = {
   recipeData: string
 }
@@ -51,41 +53,34 @@ const parseRecipe = (recipeDataRaw: string) => {
 export const Recipe = ({ recipeData }: RecipeProps) => {
   const recipe = parseRecipe(recipeData)
   return (
-    <div className="bg-blue-100 flex flex-col gap-2">
+    <div className="flex flex-col gap-5 box-border">
       <div>
-        <div>Recipe</div>
-        <div>{recipe.name}</div>
+        <div className="text-2xl font-semibold flex">{recipe.name}</div>
       </div>
-      <div>
-        <div>Ingredients</div>
-        <div>
-          {recipe.ingredients.map((ingredient, index) => (
-            <div key={index}> {ingredient}</div>
-          ))}
+      <div className="flex flex-row gap-10 box-border flex-wrap md:flex-nowrap w-full">
+        <div className="min-w-80 max-w-100">
+          <div className="text-lg font-semibold">Ingredients</div>
+          <ul className="list-disc list-inside">
+            {recipe.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="min-w-100">
+          <div className="text-lg font-semibold">Instructions</div>
+          <ol className="list-decimal list-inside">
+            {recipe.instructions.map((step, index) => (
+              <li key={index}>{step}</li>
+            ))}
+          </ol>
         </div>
       </div>
 
-      <div>
-        <div>Instructions</div>
-        <div>
-          {recipe.instructions.map((step, index) => (
-            <div key={index}>
-              {index + 1}: {step}
-            </div>
-          ))}
-        </div>
-      </div>
       {recipe.notes && (
-        <div>
-          <div>Notes</div>
-          <div>{recipe.notes}</div>
-        </div>
+        <TextCard title="Notes" text={recipe.notes} color="watermelon" />
       )}
       {recipe.funFact && (
-        <div>
-          <div>Fun Fact</div>
-          <div>{recipe.funFact}</div>
-        </div>
+        <TextCard title="Notes" text={recipe.funFact} color="tomato" />
       )}
     </div>
   )

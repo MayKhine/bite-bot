@@ -71,11 +71,11 @@ export const GenerateRecipe = ({ getRecipeResult }: RecipeBoardProps) => {
       )}
       <button
         onClick={handleSubmit}
-        className={`px-4 py-2 rounded-md w-max
+        className={`px-4 py-3 rounded-lg w-max
           ${
             loading || recipeIngredients.length == 0
-              ? "bg-gray-500 cursor-not-allowed text-white border-solid border-3 border-gray-500 box-border"
-              : "bg-watermelon hover:bg-tomato text-white border-solid border-3 border-tomato box-border cursor-pointer"
+              ? "bg-gray-500 cursor-not-allowed text-white border-solid box-border"
+              : "bg-tomato hover:bg-cherry text-white border-solid box-border cursor-pointer"
           }
           `}
         disabled={loading || recipeIngredients.length == 0}

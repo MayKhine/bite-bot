@@ -14,16 +14,18 @@ export const App = () => {
   const [recipeResult, setRecipeResult] = useState<string>()
 
   return (
-    <div className="p-10 box-border ">
+    <div>
       <Header />
 
-      <div className="flex flex-col gap-10">
-        <GenerateRecipe
-          getRecipeResult={(result: string) => {
-            setRecipeResult(result)
-          }}
-        />
-        {recipeResult && <Recipe recipeData={recipeResult} />}
+      <div className="flex w-full justify-center">
+        <div className="flex flex-col gap-10 max-w-400box-border p-10">
+          <GenerateRecipe
+            getRecipeResult={(result: string) => {
+              setRecipeResult(result)
+            }}
+          />
+          {recipeResult && <Recipe recipeData={recipeResult} />}
+        </div>
       </div>
     </div>
   )
