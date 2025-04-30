@@ -62,7 +62,10 @@ export const GenerateRecipe = ({ getRecipeResult }: RecipeBoardProps) => {
                 key={index}
                 value={ingredient}
                 onClick={() => {
-                  console.log("Delete this ", ingredient)
+                  setRecipeIngredients((prev) => {
+                    return prev.filter((item) => item != ingredient)
+                  })
+                  setButtonText("Get recipe")
                 }}
               />
             )

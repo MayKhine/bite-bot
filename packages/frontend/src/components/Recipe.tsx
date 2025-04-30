@@ -80,7 +80,7 @@ export const Recipe = ({ recipeData }: RecipeProps) => {
         <TextCard title="Notes" text={recipe.notes} color="watermelon" />
       )}
       {recipe.funFact && (
-        <TextCard title="Notes" text={recipe.funFact} color="tomato" />
+        <TextCard title="Fun Fact" text={recipe.funFact} color="tomato" />
       )}
     </div>
   )
