@@ -13,7 +13,7 @@ export const IngredientButton = ({ value, onClick }: IngredientButtonProps) => {
     // </div>
 
     <div className="relative group inline-block" onClick={onClick}>
-      <span className="bg-pink-200 px-4 py-3  w-max rounded-lg cursor-pointer">
+      <span className="bg-pink-200 px-3 py-2  w-max rounded-3xl cursor-pointer">
         {value}
       </span>
       <div className="absolute -top-8 left-1/2 -translate-x bg-gray-700  text-gray-50 text-xs px-3 py-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition pointer-events-none z-10">

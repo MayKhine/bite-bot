@@ -18,7 +18,7 @@ export const App = () => {
       <Header />
 
       <div className="flex w-full justify-center">
-        <div className="flex flex-col gap-10 max-w-400box-border p-10">
+        <div className="flex flex-col gap-10 max-w-400 box-border p-10">
           <GenerateRecipe
             getRecipeResult={(result: string) => {
               setRecipeResult(result)
