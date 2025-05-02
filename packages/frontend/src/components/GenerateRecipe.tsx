@@ -20,7 +20,7 @@ export const GenerateRecipe = ({ getRecipeResult }: RecipeBoardProps) => {
     setLoading(true)
     setButtonText("Get a different recipe")
     try {
-      const res = await fetch("http://localhost:4000/generate-recipe", {
+      const res = await fetch("/api/generate-recipe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

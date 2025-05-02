@@ -13,7 +13,6 @@ const groq = new Groq({
   apiKey: apiKey,
 })
 
-console.log("grop api", groq.apiKey)
 export const generateRecipe = async (prompt: string) => {
   console.log("prompt in generate recipe: ", prompt)
 

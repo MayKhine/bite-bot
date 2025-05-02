@@ -2,7 +2,6 @@ import { Router, Request, Response } from "express"
 import { generateRecipe } from "./groqApiCall"
 
 const router: Router = Router()
-
 router.get("/", (req: Request, res: Response) => {
   res.send({ status: "ok", message: "Recipe router is working" })
 })
