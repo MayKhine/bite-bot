@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "vite-node -w src/main.ts",
+    "build": "rollup -c rollup.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -23,6 +25,14 @@
     "@types/node": "^22.15.3",
     "ts-node-dev": "^2.0.0",
     "typescript": "~5.7.2",
-    "vite-plugin-node": "^5.0.1"
+    "vite-plugin-node": "^5.0.1",
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-replace": "^6.0.1",
+    "rollup": "4.27.4",
+    "rollup-plugin-auto-named-exports": "1.0.0-beta.3",
+    "rollup-plugin-polyfill-node": "^0.13.0",
+    "rollup-plugin-typescript2": "^0.36.0"
   }
 }

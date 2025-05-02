@@ -24,7 +24,6 @@ const main = async () => {
 
   app.get("/*", (req: Request, res: Response): any => {
     const pathToIndex = path.join(pathToFrontend, "index.html")
-    console.log("sendfile from", pathToIndex)
     res.sendFile(pathToIndex)
   })
 
