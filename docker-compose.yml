@@ -11,6 +11,6 @@ services:
     volumes:
       - bitebot-data:/data
     restart: unless-stopped
-    # todo this should maybe be moved to secrets
+
 volumes:
   bitebot-data:

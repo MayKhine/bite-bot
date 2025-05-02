@@ -19,3 +19,7 @@ body {
   --color-watermelon: #fc6c85;
   --color-cherry: #d62828;
 }
+
+.lottie svg > g > g:last-child {
+  display: none !important;
+}

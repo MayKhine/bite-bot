@@ -4,14 +4,6 @@ type IngredientButtonProps = {
 }
 export const IngredientButton = ({ value, onClick }: IngredientButtonProps) => {
   return (
-    // <div
-    //   title="Remove ingredient"
-    //   onClick={onClick}
-    //   className="bg-pink-200 px-4 py-3  w-max rounded-md cursor-pointer"
-    // >
-    //   {value}
-    // </div>
-
     <div className="relative group inline-block" onClick={onClick}>
       <span className="bg-pink-300 px-3 py-2  w-max rounded-3xl cursor-pointer font-light ">
         {value}
