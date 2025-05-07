@@ -11,6 +11,8 @@ services:
     volumes:
       - bitebot-data:/data
     restart: unless-stopped
-
+    # todo this should maybe be moved to secrets
+    environment:
+      - GROQ_API_KEY=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
 volumes:
   bitebot-data:

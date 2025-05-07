@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Header } from "./components/Header"
 import { GenerateRecipe } from "./components/GenerateRecipe"
 import { Recipe } from "./components/Recipe"
+import { Footer } from "./components/Footer"
 
 export type RecipeResultType = {
   name: string
@@ -14,10 +15,9 @@ export const App = () => {
   const [recipeResult, setRecipeResult] = useState<string>()
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Header />
-
-      <div className="flex w-full justify-center">
+      <div className="flex w-full justify-center flex-grow">
         <div className="flex flex-col gap-10 max-w-400 box-border p-10">
           <GenerateRecipe
             getRecipeResult={(result: string) => {
@@ -27,6 +27,7 @@ export const App = () => {
           {recipeResult && <Recipe recipeData={recipeResult} />}
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

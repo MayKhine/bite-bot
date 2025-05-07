@@ -73,7 +73,7 @@ export const GenerateRecipe = ({ getRecipeResult }: RecipeBoardProps) => {
           />
         </div>
         {recipeIngredients.length > 0 && (
-          <div className="flex flex-row gap-3 flex-wrap w-full items-center justify-center">
+          <div className="flex flex-row gap-3 gap-y-6 flex-wrap w-full items-center justify-center">
             {recipeIngredients.map((ingredient, index) => {
               return (
                 <IngredientButton
@@ -83,6 +83,12 @@ export const GenerateRecipe = ({ getRecipeResult }: RecipeBoardProps) => {
                     setRecipeIngredients((prev) => {
                       return prev.filter((item) => item != ingredient)
                     })
+                    // add it back to the list
+                    setAvailasbleIngredientList((prev) => {
+                      const updatedList = [...prev, ingredient]
+                      return updatedList.sort()
+                    })
+
                     setButtonText("Get recipe")
                   }}
                 />
